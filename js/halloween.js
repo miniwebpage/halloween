@@ -203,19 +203,20 @@ function openWinPop(){
     popWinAudio.play().catch(console.error);
 
     if (isPlaying) { bgAudio.pause(); }
+
     setTimeout(() => {
         laughAudio.currentTime = 0;
         laughAudio.muted = false;
         laughAudio.play().catch(console.error);
-
-        setTimeout(() => {
-            if (isPlaying) { 
-                bgAudio.play().catch(console.error);
-            }
-            confirmWin.classList.remove('disabled');
-            closeWinPopUp.classList.remove('disabled');
-        }, 3000);
     }, 500);
+
+    setTimeout(() => {
+        if (isPlaying) { 
+            bgAudio.play().catch(console.error);
+        }
+        confirmWin.classList.remove('disabled');
+        closeWinPopUp.classList.remove('disabled');
+    }, 3500);
 }
 
 function closeWinPop(){
@@ -248,15 +249,15 @@ function pullLeverEffect() {
         leverPullAudio.play().catch(console.error);
 
         slotHandle.classList.add('pull');
-
-        setTimeout(() => {
-            slotHandle.classList.remove('pull');
-            setTimeout(() => {
-                leverPullAudio.pause();
-            }, 500);
-        }, 500);
-        
     }, 500);
+
+    setTimeout(() => {
+        slotHandle.classList.remove('pull');
+    }, 1000);
+
+    setTimeout(() => {
+        leverPullAudio.pause();
+    }, 1500);
 }
 
 // -------------------------------------------------
@@ -295,11 +296,12 @@ function spinningAnimation() {
                 rollStopAudio.muted = false;
                 rollStopAudio.play().catch(console.error);
 
-                setTimeout(() => {
-                    rollStopAudio.pause();
-                }, 1000);
-
             }, 2000);  // Spinning duration
+
+            setTimeout(() => {
+                rollStopAudio.pause();
+            }, 3000);  // after spinning duration
+
         }, index * 100);  // Delay for each reel
     });
 }
@@ -327,11 +329,12 @@ function addAlarmEffect(){
     setTimeout(() => {
         borderEffect.classList.remove('spinningBorder');
         borderEffect.classList.add('spinnedBorder');
-        setTimeout(() => {
-            alarmAudio.pause();
-            slotMachineContainer.classList.remove('glowingAlarm');
-        }, 700);
     }, 1600); //<- spinning border duration
+
+    setTimeout(() => {
+        alarmAudio.pause();
+        slotMachineContainer.classList.remove('glowingAlarm');
+    }, 2300); //<- after spinning border duration
 }
 
 function removeAlarmEffect(){
@@ -371,15 +374,10 @@ function handleButtonClick(){
     let eventMoney = rea.eventMoney;
 
     createMoreSlotItems(winningValue);
-    setTimeout(() => {
-        spinningAnimation();
-        setTimeout(() => {
-            addAlarmEffect();
-            setTimeout(() => {
-                openWinPop();
-            }, 2400);
-        }, 2500);
-    }, 1100);
+    setTimeout(spinningAnimation, 1100);
+    setTimeout(addAlarmEffect, 3600);
+    setTimeout(openWinPop, 6000);
+
     updateslotCountSpanNumber(); 
     addDataRecord(eventCreateTime, eventMoney);
 }
