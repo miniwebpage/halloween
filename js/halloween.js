@@ -1,6 +1,4 @@
 
-console.log('width: ' + window.innerWidth);
-console.log('height: ' + window.innerHeight);
 // -------------------------------------------------
 let hasPreloadAudio = false;
 function preloadAudio(){
@@ -352,7 +350,7 @@ function handleButtonClick(){
 
     jQuery.ajax({
         type: "POST",
-        url: "__URL__/ajaxGetRedEnvelopeMoney",
+        //url: "__URL__/ajaxGetRedEnvelopeMoney",
         timeout: 30000, // Timeout duration
         success: function(data) {
             // prizeResult = JSON.parse(data); <-  當後端準備好時，取消註解此行並刪除具有相同變數的 set static 變數
