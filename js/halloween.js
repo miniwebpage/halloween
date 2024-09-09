@@ -180,7 +180,6 @@ function addDataRecord(eventCreateTime, eventMoney){
     $('#recordContainer-Inner h4').hide();
 }
 // -------------------------------------------------
-
 const confirmWin = document.getElementById('confirmWin');
 
 const popWinAudio = new Audio('music/popWin.mp3');
@@ -193,6 +192,7 @@ laughAudio.volume = 0.7;
 function openWinPop(){
     confirmWin.classList.add('disabled');
     closeWinPopUp.classList.add('disabled');
+    document.body.style.pointerEvents = 'none';
 
     winningPopUp.classList.add('openPopUp');
     document.body.style.overflow = 'hidden';
@@ -215,6 +215,7 @@ function openWinPop(){
         }
         confirmWin.classList.remove('disabled');
         closeWinPopUp.classList.remove('disabled');
+        document.body.style.pointerEvents = 'auto';
     }, 3500);
 }
 
