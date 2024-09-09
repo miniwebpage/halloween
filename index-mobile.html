@@ -1,0 +1,156 @@
+<!-- Halloween Event by Kristina -->
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <title>Halloween Event</title>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    
+    <link rel="stylesheet" href="css/mobile.css" type="text/css"/>
+</head>
+<body>
+    <main id="halloweenSlotMachine" style="background-image: url(images/mobile/bg.jpg);">
+        <div class="maincontainer" style="background-image: url(images/mobile/machine.png);">
+            <img class="title" src="images/fanti/title.png">
+            <p class="mb-0 time wthTxtBorder2" style="--edgeColor:#fff;">時間:<span>10月30日00:00至10月31日 23:59</span></p>
+            <div class="numberOfSLots" style="background-image: url(images/time.png);">
+                <p class="mb-0 wthTxtBorder1" style="--edgeColor:#fff;">可玩次數: <span id="slotCountSpan"></span> 次</p>
+            </div>
+            <div id="slotMachineContainer" class="slotMachineContainer">
+                <div id="slotMachine" class="slotMachine" style="background-image: url(images/frame3.png);">
+                    <div id="borderEffect">
+                        <span class="top"></span>
+                        <span class="right"></span>
+                        <span class="bottom"></span>
+                        <span class="left"></span>
+                    </div>
+                </div>
+                <div class="slotHandle">
+                    <img src="images/mobile/handle-head.png" class="handle-head">
+                    <img id="slotHandle" src="images/mobile/handle-body.png" class="handle-body">
+                </div>
+            </div>
+            <div class="buttonCon">
+                <div id="startSlotBtn" onclick="handleButtonClick();" style="background-image: url(images/start-button-bg.png);">
+                    <img class="btnIcon" src="images/rotate.png">
+                    <span>點擊開始</span>
+                </div>
+            </div>
+            <div class="widthdrawCondition">
+                <p class="mb-0 header"><span>提款條件:</span>彩金需要5倍有效投註量,即可進行提款。</p>
+                <p class="mb-0"><img class="wcIcon" src="images/game/8888.png"><span>x 3 = 8,888</span></p>
+                <p class="mb-0"><img class="wcIcon" src="images/game/1688.png"><span>x 3 = 1,688</span></p>
+                <p class="mb-0"><img class="wcIcon" src="images/game/888.png"><span>x 3 = 888</span></p>
+                <p class="mb-0"><img class="wcIcon" src="images/game/588.png"><span>x 3 = 588</span></p>
+                <p class="mb-0"><img class="wcIcon" src="images/game/188.png"><span>x 3 = 188</span></p>
+                <p class="mb-0"><img class="wcIcon" src="images/game/58.png"><span>x 3 = 58</span></p>
+            </div>
+            <div class="activityRuleCon">
+                <img class="activityRulesLabel" src="images/fanti/activityRulesLabel.png">
+                <div class="content wthTxtBorder" style="--edgeColor:#fff;">
+                    <p class="mb-0">活動內容:</p>
+                    <p class="mb-0">活動期間內於任一遊戲館進行有效投注量累計≥100,000點即可額外領取,有效投注量0.1%的端</p>
+                    <p class="mb-3">午洗碼彩金,彩金金额無上限</p>
+                    <p class="mb-0">注意事項:該活動有效投注量僅計算單一遊戲館數據,不同遊戲館將無法加總計算</p>
+                    <p class="mb-0">● 計算區間:6月10日00:00~6月16日23:59</p>
+                    <p class="mb-0">● 查詢方式: 【會員中心】-【遊戲報表】</p>
+                    <p class="mb-0">● 領取時間:6月17日12:00~6月18日12:00;超出時間未領取視同自動放棄</p>
+                    <p class="mb-0">● 領取方式:於本活動頁面上方點擊【立即申請】,活動專員進行彩金派發</p>
+                    <p class="mb-0">● 彩金需1倍有效投注量,即可進行託售</p>
+                    <p class="mb-0">● 有效投注定義:體育投注(若投注内出現輸半或赢半的情況,系統將計算總投注額的一般為有效 投注),任何和局、取消的赛事投注,任何未產生輸贏結果的、投注失敗的、對押的投注;真人館 任何和局,無風險投注,免傭不計算,計算賠率后有效投注量</p>
+                    <p class="mb-0">● 為秉持公平公正原則,本娛樂平台有權對會員進行監控,若發生違背、欺騙或利用不正當手段 進行非法獲利者,我們將有權凍結您帳號內點數</p>
+                </div>
+            </div>
+            <div class="menuBtn">
+                <p class="mb-0 musicMuted" id="backgroundMusic">
+                    <img id="musicBtn" class="menuIco" src="images/music.png" onclick="toggleAudio();">
+                    <span class="wthTxtBorder1" style="--edgeColor:#fff;">音樂</span>
+                </p>
+                <p class="mb-0">
+                    <img id="homeBtn" class="menuIco" src="images/home.png">
+                    <span class="wthTxtBorder1" style="--edgeColor:#fff;">返回</span>
+                </p>
+                <p class="mb-0">
+                    <img id="recordBtn" class="menuIco" src="images/gift.png" onclick="openRecordPopUp()">
+                    <span class="wthTxtBorder1" style="--edgeColor:#fff;">紀錄</span>
+                </p>
+            </div>
+        </div> 
+        <!-- winning pop up -->
+        <div id="winningPopUp" class="winningPopUp" onclick="closeWinPop()">
+            <div class="winningPopCon"  onclick="event.stopPropagation();">
+                <span id="closeWinPopUp" class="closePopUp" onclick="closeWinPop()"></span>
+                <div class="pumpinkinMan" id="pumpinkinMan">
+                    <img src="images/fanti/pop.png">
+                    <p class="mb-0 wthTxtBorder2" id="winningPopTxt" style="--edgeColor:#fff;"></p>
+                </div>
+                <div id="confirmWin"  onclick="closeWinPop()" disabled><img src="images/fanti/ok.png"></div>
+            </div>
+        </div>         
+        <!-- bonus record pop up -->
+        <div id="recordConPopUp" onclick="closeRecordPopUp()">
+            <div class="recordContainer-Overlay" onclick="event.stopPropagation();">
+                <span id="closePopUp" class="closePopUp" onclick="closeRecordPopUp()"></span>
+                <img class="recordPop" src="images/fanti/recordLabel.png" alt="Bonus Record">
+                <div id="recordContainer-Inner">
+                    <if condition='count($redEnvelopeArray) gt 0'>
+                        <table id="recordInfo">
+                    <else />
+                        <h4 class="noRecordSpan">無記錄</h4>
+                        <table id="recordInfo" style="display: none;">
+                    </if>
+                        <thead class="recordInfo-head">
+                            <tr>
+                                <th>時間</th>
+                                <th>獎金</th>
+                            </tr>
+                        </thead>
+                        <tbody class="recordInfo-body">
+                            <volist name="redEnvelopeArray" id="data" key="k">
+                                <tr>
+                                    <td>{$data.eventCreateTime}</td>
+                                    <td>{$data.eventMoney}</td>
+                                </tr>
+                            </volist>
+                            <tr hidden template="recordTr">
+                                <td>{$data.eventCreateTime}</td>
+                                <td>{$data.eventMoney}</td>
+                            </tr>
+                        </tbody>
+                    </table>    
+                </div>
+            </div>
+        </div>
+        <!-- not login pop up -->
+        <div id="notLoginPopUp" class="systemPromptPopUp" onclick="closeNotLoginPopUp()">
+            <div class="systemPromptPopCon"  onclick="event.stopPropagation();">
+                <img class="systemPromptTitle" src="images/fanti/systempromt.png" alt="Bonus Record">
+                <span id="closePopUp" class="closePopUp" onclick="closeNotLoginPopUp()"></span>
+                <h4>請先登入帳號。<br>
+                    以享受更好的遊戲體驗。</h4>
+                <img class="systemPromptConfirm" src="images/fanti/confirm.png" onclick="closeNotLoginPopUp()">
+            </div>
+        </div>
+        <!-- Not enough draws -->
+        <div id="noDrawsPopUp" class="systemPromptPopUp" onclick="closeNoDrawsPopUp()">
+            <div class="systemPromptPopCon"  onclick="event.stopPropagation();">
+                <img class="systemPromptTitle" src="images/fanti/systempromt.png" alt="Bonus Record">
+                <span id="closePopUp" class="closePopUp" onclick="closeNoDrawsPopUp()"></span>
+                <h4>無抽獎次數。</h4>
+                <img class="systemPromptConfirm" src="images/fanti/confirm.png" onclick="closeNoDrawsPopUp()">
+            </div>
+        </div>
+    </main>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/halloween.js"></script>
+</html>
