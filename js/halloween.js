@@ -6,14 +6,14 @@ function preloadAudio(){
         startRollAudio.muted = true;
         startRollAudio.play();
 
-        // leverPullAudio.muted = true;
-        // leverPullAudio.play();
+        leverPullAudio.muted = true;
+        leverPullAudio.play();
 
         rollPlayAudio.muted = true;
         rollPlayAudio.play();
 
-        // rollStopAudio.muted = true;
-        // rollStopAudio.play();
+        rollStopAudio.muted = true;
+        rollStopAudio.play();
 
         alarmAudio.muted = true;
         alarmAudio.play();
@@ -23,6 +23,8 @@ function preloadAudio(){
 
         laughAudio.muted = true;
         laughAudio.play();
+
+        console.log('preloaded');
         
         hasPreloadAudio = true;
     }
@@ -184,10 +186,10 @@ const confirmWin = document.getElementById('confirmWin');
 
 const popWinAudio = new Audio('music/popWin.mp3');
 popWinAudio.load;
+popWinAudio.volume = 0.7;
 const laughAudio = new Audio('music/laugh.mp3');
 laughAudio.load;
-popWinAudio.volume = 0.2;
-laughAudio.volume = 0.2;
+laughAudio.volume = 0.7;
 
 function openWinPop(){
     confirmWin.classList.add('disabled');
@@ -228,10 +230,10 @@ function closeWinPop(){
 // -------------------------------------------------
 
 // animation slot machine
-const startRollAudio = new Audio('music/pullLever.mp3');
+const startRollAudio = new Audio('music/clickStart.mp3');
 startRollAudio.load;
-// const leverPullAudio = new Audio('music/levelPull.m4a');
-// leverPullAudio.load;
+const leverPullAudio = new Audio('music/levelPull.m4a');
+leverPullAudio.load;
 
 function pullLeverEffect() {
     startRollAudio.currentTime = 0;
@@ -239,32 +241,33 @@ function pullLeverEffect() {
     startRollAudio.play().catch(console.error);
 
     setTimeout(() => {
-        console.log('audio changed');
-        // startRollAudio.pause();
+        startRollAudio.pause();
 
-        // leverPullAudio.currentTime = 0;
-        // leverPullAudio.muted = false;
-        // leverPullAudio.play().catch(console.error);
+        leverPullAudio.currentTime = 0;
+        leverPullAudio.muted = false;
+        leverPullAudio.play().catch(console.error);
 
         slotHandle.classList.add('pull');
 
         setTimeout(() => {
             slotHandle.classList.remove('pull');
-            startRollAudio.pause();
+            setTimeout(() => {
+                leverPullAudio.pause();
+            }, 500);
         }, 500);
         
-    }, 600);
+    }, 500);
 }
 
 // -------------------------------------------------
 
-const rollPlayAudio = new Audio('music/rollPlay2.mp3');
+const rollPlayAudio = new Audio('music/rollPlay.mp3');
 rollPlayAudio.load;
 rollPlayAudio.volume = 0.7;
 
-// const rollStopAudio = new Audio('music/rollStop.mp3');
-// rollStopAudio.load;
-// rollStopAudio.volume = 0.7;
+const rollStopAudio = new Audio('music/rollStop.mp3');
+rollStopAudio.load;
+rollStopAudio.volume = 0.7;
 
 function spinningAnimation() {
     const reelsInners = document.querySelectorAll('.reelsInner');
@@ -273,7 +276,7 @@ function spinningAnimation() {
     rollPlayAudio.muted = false;
     rollPlayAudio.play().catch(console.error);
 
-    // rollStopAudio.currentTime = 0;
+    rollStopAudio.currentTime = 0;
 
     reelsInners.forEach((reelsInner, index) => {
         setTimeout(() => {
@@ -287,14 +290,14 @@ function spinningAnimation() {
                 });
 
                 reelsInner.classList.remove('spinning');
-                // rollPlayAudio.pause();
-                // rollStopAudio.muted = false;
-                // rollStopAudio.play().catch(console.error);
+                rollPlayAudio.pause();
+
+                rollStopAudio.muted = false;
+                rollStopAudio.play().catch(console.error);
 
                 setTimeout(() => {
-                    // rollStopAudio.pause();
-                    rollPlayAudio.pause();
-                }, 500);
+                    rollStopAudio.pause();
+                }, 1000);
 
             }, 2000);  // Spinning duration
         }, index * 100);  // Delay for each reel
