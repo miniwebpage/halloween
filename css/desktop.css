@@ -982,9 +982,8 @@ img.activityRulesLabel {
   display: none;
 }
 
-#recordConPopUp,
-.recordContainer-overlay {
-  position: absolute;
+#recordConPopUp {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;

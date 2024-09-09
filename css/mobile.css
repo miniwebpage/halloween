@@ -968,9 +968,8 @@ p#winningPopTxt { transform: translate(-50%, -0%) scale(0);}
   display: none;
 }
 
-#recordConPopUp,
-.recordContainer-overlay {
-  position: absolute;
+#recordConPopUp {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
