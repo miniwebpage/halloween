@@ -1225,7 +1225,8 @@ h4.noRecordSpan {
 
   #slotMachineContainer::after {
     bottom: -29%;
-    left: 22%;
+    left: 24%;
+    width: 38px;
   }
 
   img.wcIcon {
@@ -1308,7 +1309,8 @@ h4.noRecordSpan {
 
   #slotMachineContainer::after {
     bottom: -27%;
-    left: 19%;
+    left: 22%;
+    width: 36px;
   }
 
   img.activityRulesLabel {
@@ -1378,7 +1380,6 @@ h4.noRecordSpan {
 
   #slotMachineContainer::after {
     bottom: -26%;
-    left: 18%;
   }
 
   img.wcIcon {
@@ -1413,8 +1414,7 @@ h4.noRecordSpan {
   }
 
   #slotMachineContainer::after {
-    width: 46px;
-    left: 18%;
+    left: 20%;
   }
 
   .systemPromptPopCon {

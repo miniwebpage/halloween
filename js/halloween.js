@@ -74,7 +74,6 @@ function getRandomIcon() {
     const icons = [ '8888', '1688', '888', '588', '188','58'];
     return icons[Math.floor(Math.random() * icons.length)];
 }
-
 // -------------------------------------------------
 
 let slotItemCount = 34;
@@ -114,14 +113,11 @@ function generateSlotMachine() {
     document.head.appendChild(spinKeyFrames);
 }
 generateSlotMachine();
-
 // -------------------------------------------------
 
 const startSlotBtn = document.getElementById('startSlotBtn');
 
-function createMoreSlotItems(winningValue) {
-    const winIcon = `images/game/${winningValue}.png`;
-    
+function createMoreSlotItems() {
     const reelsInners = document.querySelectorAll('.reelsInner');
     const slotItemHeight = $('.slot').eq(0).height();
 
@@ -139,20 +135,24 @@ function createMoreSlotItems(winningValue) {
 
         const targetElement = reelsInner.querySelector('.slot.item');
         reelsInner.insertBefore(fragment, targetElement || null);
-
-        setTimeout(() => {
-            const firstslot = reelsInner.querySelector('.slot');
-            if (firstslot) {
-                firstslot.classList.add('win');
-                firstslot.style.backgroundImage = `url(${winIcon})`;
-            }
-        }, 1000);
     });
-    
+}
+createMoreSlotItems();
+// -------------------------------------------------
+
+function settingData(winningValue) {
+    $('.reelsInner').each(function() {
+        const firstslotItem = $(this).find('.slot').first();
+        
+        if (firstslotItem.length) {
+            firstslotItem.addClass('win');
+            firstslotItem.css('background-image', `url(images/game/${winningValue}.png)`);
+        }
+    });
+
     var winningPopTxt = document.getElementById('winningPopTxt');
     winningPopTxt.textContent = winningValue;
 }
-
 // -------------------------------------------------
 
 //Function 將最新條目新增至記錄框
@@ -179,7 +179,6 @@ function addDataRecord(eventCreateTime, eventMoney){
     $('#recordContainer-Inner table').show();
     $('#recordContainer-Inner h4').hide();
 }
-
 // -------------------------------------------------
 
 const confirmWin = document.getElementById('confirmWin');
@@ -220,6 +219,7 @@ function openWinPop(){
 }
 
 function closeWinPop(){
+    createMoreSlotItems();
     startSlotBtn.classList.remove('disabled');
     laughAudio.pause();
     setTimeout(() => {
@@ -357,7 +357,7 @@ function handleButtonClick(){
 
     let prizeResult = { 
         openMoney: getRandomIcon(),
-        lotteryAmount: '0',
+        lotteryAmount: '1',
         redEnvelopeArray: [
             {
                 eventCreateTime: '2024/3/26 02:00:00',
@@ -373,7 +373,7 @@ function handleButtonClick(){
     let eventCreateTime = rea.eventCreateTime;
     let eventMoney = rea.eventMoney;
 
-    createMoreSlotItems(winningValue);
+    setTimeout(settingData(winningValue), 1000);
     setTimeout(spinningAnimation, 1100);
     setTimeout(addAlarmEffect, 3600);
     setTimeout(openWinPop, 6000);
