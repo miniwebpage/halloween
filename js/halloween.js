@@ -12,8 +12,8 @@ function preloadAudio(){
         rollPlayAudio.muted = true;
         rollPlayAudio.play();
 
-        rollStopAudio.muted = true;
-        rollStopAudio.play();
+        // rollStopAudio.muted = true;
+        // rollStopAudio.play();
 
         alarmAudio.muted = true;
         alarmAudio.play();
@@ -188,6 +188,8 @@ const popWinAudio = new Audio('music/popWin.mp3');
 popWinAudio.load;
 const laughAudio = new Audio('music/laugh.mp3');
 laughAudio.load;
+popWinAudio.volume = 0;
+laughAudio.volume = 0;
 
 function openWinPop(){
     confirmWin.classList.add('disabled');
@@ -257,22 +259,22 @@ function pullLeverEffect() {
 
 // -------------------------------------------------
 
-const rollPlayAudio = new Audio('music/rollPlay.mp3');
+const rollPlayAudio = new Audio('music/rollPlay2.mp3');
 rollPlayAudio.load;
-rollPlayAudio.volume = 0.5;
+rollPlayAudio.volume = 0.7;
 
-const rollStopAudio = new Audio('music/rollStop.mp3');
-rollStopAudio.load;
-rollStopAudio.volume = 0.7;
+// const rollStopAudio = new Audio('music/rollStop.mp3');
+// rollStopAudio.load;
+// rollStopAudio.volume = 0.7;
 
 function spinningAnimation() {
     const reelsInners = document.querySelectorAll('.reelsInner');
 
-    rollPlayAudio.currentTime = 0;
+    rollPlayAudio.currentTime = 0.6;
     rollPlayAudio.muted = false;
     rollPlayAudio.play().catch(console.error);
 
-    rollStopAudio.currentTime = 0;
+    // rollStopAudio.currentTime = 0;
 
     reelsInners.forEach((reelsInner, index) => {
         setTimeout(() => {
@@ -286,13 +288,13 @@ function spinningAnimation() {
                 });
 
                 reelsInner.classList.remove('spinning');
-                rollPlayAudio.pause();
-
-                rollStopAudio.muted = false;
-                rollStopAudio.play().catch(console.error);
+                // rollPlayAudio.pause();
+                // rollStopAudio.muted = false;
+                // rollStopAudio.play().catch(console.error);
 
                 setTimeout(() => {
-                    rollStopAudio.pause();
+                    // rollStopAudio.pause();
+                    rollPlayAudio.pause();
                 }, 500);
 
             }, 2000);  // Spinning duration
