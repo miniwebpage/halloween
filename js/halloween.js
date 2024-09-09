@@ -350,7 +350,7 @@ function handleButtonClick(){
 
     let prizeResult = { 
         openMoney: getRandomIcon(),
-        lotteryAmount: '1',
+        lotteryAmount: '0',
         redEnvelopeArray: [
             {
                 eventCreateTime: '2024/3/26 02:00:00',
