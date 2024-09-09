@@ -6,8 +6,8 @@ function preloadAudio(){
         startRollAudio.muted = true;
         startRollAudio.play();
 
-        leverPullAudio.muted = true;
-        leverPullAudio.play();
+        // leverPullAudio.muted = true;
+        // leverPullAudio.play();
 
         rollPlayAudio.muted = true;
         rollPlayAudio.play();
@@ -23,8 +23,6 @@ function preloadAudio(){
 
         laughAudio.muted = true;
         laughAudio.play();
-
-        console.log('preloaded');
         
         hasPreloadAudio = true;
     }
@@ -188,8 +186,8 @@ const popWinAudio = new Audio('music/popWin.mp3');
 popWinAudio.load;
 const laughAudio = new Audio('music/laugh.mp3');
 laughAudio.load;
-popWinAudio.volume = 0;
-laughAudio.volume = 0;
+popWinAudio.volume = 0.2;
+laughAudio.volume = 0.2;
 
 function openWinPop(){
     confirmWin.classList.add('disabled');
@@ -230,10 +228,10 @@ function closeWinPop(){
 // -------------------------------------------------
 
 // animation slot machine
-const startRollAudio = new Audio('music/clickStart.mp3');
+const startRollAudio = new Audio('music/pullLever.mp3');
 startRollAudio.load;
-const leverPullAudio = new Audio('music/levelPull.m4a');
-leverPullAudio.load;
+// const leverPullAudio = new Audio('music/levelPull.m4a');
+// leverPullAudio.load;
 
 function pullLeverEffect() {
     startRollAudio.currentTime = 0;
@@ -241,17 +239,18 @@ function pullLeverEffect() {
     startRollAudio.play().catch(console.error);
 
     setTimeout(() => {
-        startRollAudio.pause();
+        console.log('audio changed');
+        // startRollAudio.pause();
 
-        leverPullAudio.currentTime = 0;
-        leverPullAudio.muted = false;
-        leverPullAudio.play().catch(console.error);
+        // leverPullAudio.currentTime = 0;
+        // leverPullAudio.muted = false;
+        // leverPullAudio.play().catch(console.error);
 
         slotHandle.classList.add('pull');
 
         setTimeout(() => {
             slotHandle.classList.remove('pull');
-            leverPullAudio.pause();
+            startRollAudio.pause();
         }, 500);
         
     }, 600);
