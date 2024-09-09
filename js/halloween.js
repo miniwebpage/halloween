@@ -348,47 +348,36 @@ function handleButtonClick(){
     removeAlarmEffect();
     pullLeverEffect();
 
-    jQuery.ajax({
-        type: "POST",
-        //url: "__URL__/ajaxGetRedEnvelopeMoney",
-        timeout: 30000, // Timeout duration
-        success: function(data) {
-            // prizeResult = JSON.parse(data); <-  當後端準備好時，取消註解此行並刪除具有相同變數的 set static 變數
-            let prizeResult = { 
-                openMoney: getRandomIcon(),
-                lotteryAmount: '1',
-                redEnvelopeArray: [
-                    {
-                        eventCreateTime: '2024/3/26 02:00:00',
-                        eventMoney: '10,000'
-                    }
-                ]
-            };
+    let prizeResult = { 
+        openMoney: getRandomIcon(),
+        lotteryAmount: '1',
+        redEnvelopeArray: [
+            {
+                eventCreateTime: '2024/3/26 02:00:00',
+                eventMoney: '10,000'
+            }
+        ]
+    };
 
-            let winningValue = prizeResult.openMoney;
-            leftDrawAmount = prizeResult.lotteryAmount;
-            
-            let rea = prizeResult.redEnvelopeArray[0];
-            let eventCreateTime = rea.eventCreateTime;
-            let eventMoney = rea.eventMoney;
+    let winningValue = prizeResult.openMoney;
+    leftDrawAmount = prizeResult.lotteryAmount;
+    
+    let rea = prizeResult.redEnvelopeArray[0];
+    let eventCreateTime = rea.eventCreateTime;
+    let eventMoney = rea.eventMoney;
 
-            createMoreSlotItems(winningValue);
+    createMoreSlotItems(winningValue);
+    setTimeout(() => {
+        spinningAnimation();
+        setTimeout(() => {
+            addAlarmEffect();
             setTimeout(() => {
-                spinningAnimation();
-                setTimeout(() => {
-                    addAlarmEffect();
-                    setTimeout(() => {
-                        openWinPop();
-                    }, 2400);
-                }, 2500);
-            }, 1100);
-            updateslotCountSpanNumber(); 
-            addDataRecord(eventCreateTime, eventMoney);
-        },
-        error: function () {
-            console.log('error');
-        }
-    });
+                openWinPop();
+            }, 2400);
+        }, 2500);
+    }, 1100);
+    updateslotCountSpanNumber(); 
+    addDataRecord(eventCreateTime, eventMoney);
 }
 
 // -------------------------------------------------
