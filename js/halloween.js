@@ -74,7 +74,7 @@ function getRandomIcon() {
 }
 
 // 生成 3 個老虎機捲軸-------------------------------
-let slotItemCount = 34;
+let slotItemCount = 16;
 function generateSlotMachine() {
     const machineCon = document.getElementById('slotMachine');
     const threeReel = document.createElement('div');
@@ -112,7 +112,7 @@ function generateSlotMachine() {
 }
 generateSlotMachine();
 
-// 在老虎機的每個捲軸上創建 34 個隨機老虎機物品-----------------
+// 在老虎機的每個捲軸上創建 16 個隨機老虎機物品-----------------
 const startSlotBtn = document.getElementById('startSlotBtn');
 
 function createMoreSlotItems() {
