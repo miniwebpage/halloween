@@ -1,5 +1,5 @@
 
-// -------------------------------------------------
+// 預先載入彈出音訊功能----------------------------------
 let hasPreloadAudio = false;
 function preloadAudio(){
     if (!hasPreloadAudio) {
@@ -30,17 +30,16 @@ function preloadAudio(){
     }
 }
 
-var isEventEnabled = 'true';
-// var isEventEnabled = '{$eventEnabled}';
+//---------------------------------
+var isEventEnabled = 'true'; // var isEventEnabled = '{$eventEnabled}';
 let ifLogin = (isEventEnabled == 'true');
 
+//---------------------------------
 // var leftDrawAmount = parseInt('{$lotteryAmount}'); <- 當後端準備好時，取消註解此行並刪除具有相同變數的 set static 變數
 let leftDrawAmount = 1;
 leftDrawAmount = isNaN(Number(leftDrawAmount)) || leftDrawAmount === null ? 0 : Number(leftDrawAmount);
 
-// -------------------------------------------------
-
-//更新繪製計數顯示的功能
+// 更新繪製計數顯示的功能-------------------------------
 let noMoreDrawChances = false;
 const slotCountSpan = document.getElementById('slotCountSpan');
 function updateslotCountSpanNumber() {
@@ -49,8 +48,7 @@ function updateslotCountSpanNumber() {
 }
 updateslotCountSpanNumber();
 
-// -------------------------------------------------
-
+//背景音樂功能------------------------------------
 const bgAudio = new Audio('music/bg.mp3');
 bgAudio.load;
 bgAudio.volume = 0.5;
@@ -68,14 +66,14 @@ function toggleAudio() {
         bgAudio.play();
     }
 }
-// -------------------------------------------------
 
+// 生成為老虎機動畫創建隨機 icos-------------------------------------
 function getRandomIcon() {
     const icons = [ '8888', '1688', '888', '588', '188','58'];
     return icons[Math.floor(Math.random() * icons.length)];
 }
-// -------------------------------------------------
 
+// 生成 3 個老虎機捲軸-------------------------------
 let slotItemCount = 34;
 function generateSlotMachine() {
     const machineCon = document.getElementById('slotMachine');
@@ -113,8 +111,8 @@ function generateSlotMachine() {
     document.head.appendChild(spinKeyFrames);
 }
 generateSlotMachine();
-// -------------------------------------------------
 
+// 在老虎機的每個捲軸上創建 34 個隨機老虎機物品-----------------
 const startSlotBtn = document.getElementById('startSlotBtn');
 
 function createMoreSlotItems() {
@@ -138,8 +136,8 @@ function createMoreSlotItems() {
     });
 }
 createMoreSlotItems();
-// -------------------------------------------------
 
+// Function 將中獎金額資訊和中獎圖示設定為“slotItem”和“winingPopUp”----------------
 function settingData(winningValue) {
     $('.reelsInner').each(function() {
         const firstslotItem = $(this).find('.slot').first();
@@ -179,7 +177,8 @@ function addDataRecord(eventCreateTime, eventMoney){
     $('#recordContainer-Inner table').show();
     $('#recordContainer-Inner h4').hide();
 }
-// -------------------------------------------------
+
+// //win彈出框開啟時的函數----------------------------
 const confirmWin = document.getElementById('confirmWin');
 
 const popWinAudio = new Audio('music/popWin.mp3');
@@ -190,9 +189,9 @@ laughAudio.load;
 laughAudio.volume = 0.7;
 
 function openWinPop(){
-    confirmWin.classList.add('disabled');
-    closeWinPopUp.classList.add('disabled');
-    document.body.style.pointerEvents = 'none';
+    confirmWin.removeAttribute('onclick');
+    winningPopUp.removeAttribute('onclick');
+    closeWinPopUp.removeAttribute('onclick');
 
     winningPopUp.classList.add('openPopUp');
     document.body.style.overflow = 'hidden';
@@ -213,25 +212,29 @@ function openWinPop(){
         if (isPlaying) { 
             bgAudio.play().catch(console.error);
         }
-        confirmWin.classList.remove('disabled');
-        closeWinPopUp.classList.remove('disabled');
-        document.body.style.pointerEvents = 'auto';
+        confirmWin.setAttribute('onclick', 'closeWinPop();');
+        winningPopUp.setAttribute('onclick', 'closeWinPop();');
+        closeWinPopUp.setAttribute('onclick', 'closeWinPop();');
     }, 3500);
 }
 
+// //關閉win彈出視窗的函數--------------------------------
+let hasCreatedItems = false;
+
 function closeWinPop(){
-    createMoreSlotItems();
+    if (!hasCreatedItems) {
+        createMoreSlotItems();
+        hasCreatedItems = true;
+    }
     startSlotBtn.classList.remove('disabled');
     laughAudio.pause();
     setTimeout(() => {
         winningPopUp.classList.remove('openPopUp');
         document.body.style.overflow = '';
-    }, 500);
+    }, 100);
 }
 
-// -------------------------------------------------
-
-// animation slot machine
+// 啟動和拉動手把效果-----------------------------
 const startRollAudio = new Audio('music/clickStart.mp3');
 startRollAudio.load;
 const leverPullAudio = new Audio('music/levelPull.m4a');
@@ -262,7 +265,6 @@ function pullLeverEffect() {
 }
 
 // -------------------------------------------------
-
 const rollPlayAudio = new Audio('music/rollPlay.mp3');
 rollPlayAudio.load;
 rollPlayAudio.volume = 0.7;
@@ -289,6 +291,7 @@ function spinningAnimation() {
                 reelsInner.querySelectorAll('.slot').forEach(slot => {
                     if (!slot.classList.contains('win')) slot.remove();
                     setTimeout(() => { slot.classList.replace('win', 'item'); }, 500);
+                    hasCreatedItems = false;
                 });
 
                 reelsInner.classList.remove('spinning');
@@ -308,7 +311,6 @@ function spinningAnimation() {
 }
 
 // -------------------------------------------------
-
 const alarmAudio = new Audio('music/alarm.mp3');
 alarmAudio.load;
 alarmAudio.volume = 1;
@@ -345,7 +347,7 @@ function removeAlarmEffect(){
     }
 }
 
-// -----------------------------------------------------------
+// 老虎機點擊手柄----------------------------------------------
 function handleButtonClick(){
     if (!ifLogin) return openNotLoginPopUp(); //<-如果您未登錄，將開啟一個非登入彈出窗口，並且無法點擊遊戲項目。
     if (noMoreDrawChances) return openNoDrawsPopUp(); //<-如果沒有更多抽獎，則會出現抽獎彈出窗口
